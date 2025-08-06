@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>House Price Predictor</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #f0f4f8, #e2e8f0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .card h2 {
+            color: #4a5568;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            letter-spacing: 0.5px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #2d3748;
+            display: block;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 20px;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            background-color: #f7fafc;
+            font-size: 14px;
+        }
+
+        button, .reset-btn {
+            width: 100%;
+            background-color: #667eea;
+            color: white;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        button:hover, .reset-btn:hover {
+            background-color: #5a67d8;
+        }
+
+        .result {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2b6cb0;
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>House Price Predictor</h2>
+        <form id="predictionForm" action="/predict" method="post">
+            <label for="MedInc">Median Income</label>
+            <input type="text" name="MedInc" id="MedInc" placeholder="e.g. 8.3" required>
+
+            <label for="HouseAge">House Age</label>
+            <input type="text" name="HouseAge" id="HouseAge" placeholder="e.g. 20" required>
+
+            <label for="AveRooms">Average Rooms</label>
+            <input type="text" name="AveRooms" id="AveRooms" placeholder="e.g. 6.5" required>
+
+            <label for="AveBedrms">Average Bedrooms</label>
+            <input type="text" name="AveBedrms" id="AveBedrms" placeholder="e.g. 1.2" required>
+
+            <label for="Population">Population</label>
+            <input type="text" name="Population" id="Population" placeholder="e.g. 1500" required>
+
+            <label for="AveOccup">Average Occupancy</label>
+            <input type="text" name="AveOccup" id="AveOccup" placeholder="e.g. 3.2" required>
+
+            <label for="Latitude">Latitude</label>
+            <input type="text" name="Latitude" id="Latitude" placeholder="e.g. 34.21" required>
+
+            <label for="Longitude">Longitude</label>
+            <input type="text" name="Longitude" id="Longitude" placeholder="e.g. -118.5" required>
+
+            <button type="submit">Predict Price</button>
+        </form>
+
+        {% if prediction_text %}
+            <div class="result">{{ prediction_text }}</div>
+            <a href="/" class="reset-btn">New Prediction</a>
+        {% endif %}
+    </div>
+</body>
+</html>
